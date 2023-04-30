@@ -6,18 +6,18 @@ SET UP AND PREPROCESSING
 """
 
 # Hyper-parameters
-learning_rate = 0.1
+learning_rate = 0.1  # How much to change weight values every backward pass
 num_epochs = 50  # Number of times the network sees ALL the data
-num_nodes = 25
-split_ratio = 0.8
+num_nodes = 25  # Number of nodes in hidden layer
+split_ratio = 0.8  # [0, 1], The train/test split of the data
 
 
-def activation(x):
-    return 1 / (1 + np.exp(-x))
+def activation(node_value):
+    return 1 / (1 + np.exp(-node_value))
 
 
-def d_activation(x):
-    return activation(x) * (1 - activation(x))
+def d_activation(node_value):
+    return activation(node_value) * (1 - activation(node_value))
 
 
 # Data Processing
@@ -63,7 +63,7 @@ TRAINING LOOP
 for epoch in range(num_epochs):
     for x, y in zip(x_train, y_train):
 
-        # You can hardcode an input to see all operations on a simple input
+        # You can hardcode an input to see all operations for a simple x vector
         # x = np.array([0.03, 0.04, 0.01, 0.05])
 
         """
@@ -91,6 +91,8 @@ for epoch in range(num_epochs):
 
         # Instantiate final output
         output = np.zeros_like(second_matrix)
+
+        # Calculate output
         for i2, value in enumerate(hidden_nodes):
             output[i2] = np.multiply(second_matrix[i2], value)
 
@@ -179,6 +181,8 @@ for x, y in zip(x_test, y_test):
 
     # Instantiate final output
     output = np.zeros_like(second_matrix)
+
+    # Calculate output
     for i2, value in enumerate(hidden_nodes):
         output[i2] = np.multiply(second_matrix[i2], value)
 
