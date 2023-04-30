@@ -162,7 +162,7 @@ for x, y in zip(x_test, y_test):
     x = np.append(x, 1)
 
     # Instantiate hidden output
-    hidden_nodes = np.zeros_like(first_matrix)
+    hidden_nodes = np.copy(first_matrix)
 
     # Perform matrix multiplication
     for i1, value in enumerate(x):
